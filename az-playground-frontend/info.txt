@@ -1,0 +1,5 @@
+sudo docker build -t mysite .
+sudo docker run -p 80:80 -d mysite
+
+sudo docker rm -fv siterunning; sudo docker build -t az-playground-frontend:1 .; sudo docker run -p 80:80 -d --name siterunning az-playground-frontend:1
+

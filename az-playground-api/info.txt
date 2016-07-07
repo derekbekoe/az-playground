@@ -1,0 +1,23 @@
+# https://docker-py.readthedocs.io/en/latest/api/
+sudo docker run -v /var/run/docker.sock:/var/run/docker.sock -it python:3.5 bash
+
+# http://flask.pocoo.org/
+pip install Flask
+pip install docker-py
+
+>>> from docker import Client
+>>> cli = Client(base_url='unix://var/run/docker.sock')
+>>> cli.containers()
+
+
+
+
+
+sudo docker build -t api:1 .
+sudo docker run -it -d -v /var/run/docker.sock:/var/run/docker.sock -p 81:5000 api:1
+
+rm app.py; nano app.py
+
+sudo docker rm -fv api; sudo docker build -t api:1 .; sudo docker run -it -d -v /var/run/docker.sock:/var/run/docker.sock -p 3050:5000 --name api api:1
+
+curl -X POST -i 'http://40.118.133.50:3050/create'

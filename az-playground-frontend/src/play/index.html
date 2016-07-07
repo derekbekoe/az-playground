@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Project Az Playground</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+	    <script type="text/javascript">
+            var full_url = window.location.toString();
+            var found_index = full_url.indexOf('?a=');
+            var encoded_part = full_url.substring(found_index+3);
+            // CHECK THAT THE ENCODED PART IS CORRECT
+            var data = window.atob(encoded_part);
+            var parsed_data = JSON.parse(data);
+            $(document).ready(function(){
+                var iframe = $('#frame');
+                iframe.attr('src', 'http://az-playground-d1.westus.cloudapp.azure.com:'+parsed_data.port);
+            });
+        </script>
+    </head>
+	<body style="margin: 0;">
+        <iframe id="frame" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+            Your browser doesn't support iframes
+        </iframe>
+	</body>
+</html>

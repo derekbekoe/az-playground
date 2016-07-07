@@ -1,0 +1,43 @@
+az vm create -g derek1 -n dvm1 --image UbuntuLTS
+
+az network nsg rule create --access Allow --destination-address-prefix '*' --destination-port-range 80-5000 --direction InBound -g derek1 --nsg-name dvm1NSG --protocol Tcp --source-address-prefix '*' --source-port-range '*' -n allow-all --priority 1001
+
+ssh <IP_ADDRESS>
+
+# TESTING THE INSTALLATION INSIDE OF A CONTAINER
+
+sudo docker pull ubuntu:16.04
+
+sudo docker run -it ubuntu:16.04 bash
+    apt-get update
+    apt-get install -y git
+    git clone https://github.com/sourcelair/xterm.js.git xtermjs
+    apt-get install -y nodejs-legacy
+    apt-get install -y npm
+    cd xtermjs
+    npm install
+
+    apt-get install -y curl
+    apt-get install -y libssl-dev libffi-dev python-dev build-essential
+    curl -L https://aka.ms/projectazinstall -o /tmp/az_install
+    export AZURE_CLI_DISABLE_PROMPTS=1
+    bash /tmp/az_install
+    curl http://azure-cli-nightly.westus.cloudapp.azure.com/verified/setup_completion.py -o /tmp/az_completion
+    python /tmp/az_completion /usr/local/az
+
+# Commit the running container
+docker commit bfcb529de2d3 test/v1
+# Run the container and expose the port.
+sudo docker run -it -p 3000:3000 test/v1 bash
+# Start the app
+node xtermjs/demo/app
+
+
+# Build the container using my Dockerfile
+sudo docker build -t dev:4 .
+# Start the container :)
+sudo docker run -it -d -p 3000:3000 dev:4
+
+
+
+sudo docker build -t az-playground-worker:1 .

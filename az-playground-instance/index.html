@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Playground instance</title>
+        <link rel="stylesheet" href="../src/xterm.css" />
+        <link rel="stylesheet" href="../addons/fullscreen/fullscreen.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="../src/xterm.js" ></script>
+        <script src="../addons/attach/attach.js" ></script>
+        <script src="../addons/fit/fit.js" ></script>
+        <script src="../addons/fullscreen/fullscreen.js" ></script>
+        
+    </head>
+    <body>
+        <div id="terminal-container"></div>
+        <script src="main.js" defer ></script>
+        <div style="margin-left: 50%; position: fixed; height: 100%; overflow: auto;">
+            <label style="display:none;"><input type="checkbox" checked id="option-cursor-blink">Blinking cursor?</label>
+            <article class="markdown-body">
+                <h1>Welcome</h1>
+                <blockquote>
+                    <p>Your playground will exist for a few hours before it disappears.<br/>Keep the URL so you can come back to it.</p>
+                </blockquote>
+                <p>To start the CLI, run <code>az</code>. You'll see the list of available commands.</p>
+                <p><strong>Not sure where to start? How about a tutorial...</strong></p>
+                <h2>Tutorial</h2>
+                <h4>Login</h4>
+                <p>First things first, you'll need to log in to your Azure account.<br/>The command below will start the log in process.</p>
+                <pre>$ az login</pre>
+                <p>Copy the link from the command output into your browser to log in.<br/>Then return back to this page and you'll be logged into the CLI!</p>
+                <blockquote><p>For help on a command, add <code>--help</code>. For example, <code>az login --help</code></p></blockquote>
+                <h4>List your VMs</h4>
+                <p>It's really simple to list your VMs.</p>
+                <pre>$ az vm list</pre>
+                <blockquote><p>Try out a query. For example, <code>az vm list --query "[].name"</code> will list the vm names. We use <a href="http://jmespath.org/" target="_blank">JMESPath</a>.</p></blockquote>
+                <h4>Querying</h4>
+                <p>Querying allows you to filter and project the results you get from commands.
+                    <br/>We'll use <code>az vm list</code> as the command we'll run our queries on.
+                    <br/>Almost all commands support the <code>--query</code> parameter though.</p>
+                <p>The querying language we use is <a href="http://jmespath.org/" target="_blank">JMESPath</a>.</p>
+                <p>Here is a simple query to list the vm names.</p>
+                <pre>$ az vm list --query "[].name"</pre>
+                <p>This is a more complex query to list all VMs and their OS type.</p>
+                <pre>$ az vm list --query "[].[name,storageProfile.osDisk.osType]"</pre>
+                <p>You can use <a href="https://github.com/jmespath/jmespath.terminal" target="_blank">JPTerm</a> to build queries also.</p>
+                <pre>$ az vm list | jpterm</pre>
+                <blockquote><p>Use jpterm to build up query expressions.
+                    <br/> Try typing <code>[].{name:name, os:storageProfile.osDisk.osType}</code> in the JPTerm window.
+                    <br/>Type (ctrl+p) to get the expression. Then (ctrl+c) to exit JPTerm</p></blockquote>
+                <h4>Create a VM</h4>
+                <h6>Create resource group</h6>
+                <p>First, we'll create a resource group for the VM.</p>
+                <pre>$ az resource group create -l westus -n cliplayground1</pre>
+                <blockquote><p>Use tab completion to write commands faster. For example, <code>az resource group &lt;tab&gt;&lt;tab&gt;</code> will show the available commands for resource groups.</p></blockquote>
+                <h6>Create key pair</h6>
+                <p>Create an ssh key pair.</p>
+                <p>This ssh key pair will have no keyphrase and will be stored at <code>~/.ssh/id_rsa</code>.</p>
+                <pre>$ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa</pre>
+                <h6>Create the VM</h6>
+                <p>The following command will create the Ubuntu VM and use the key pair you created.</p>
+                <pre>$ az vm create -g cliplayground1 -n myvm1 --image UbuntuLTS --admin-username ubuntu</pre>
+                <blockquote><p>Try out tab completion with this command. For example, <code>az vm create -g &lt;tab&gt;&lt;tab&gt;</code> will show the available resource groups.</p></blockquote>
+                <h6>SSH into the VM</h6>
+                <p>You'll see the IP address from the output of the VM create command.</p>
+                <pre>$ ssh ubuntu@&lt;ip_address&gt;</pre>
+                <h4>Thanks</h4>
+                <p>That's the end of the tutorial.</p>
+                <p>Continue to play around with the CLI to see what else you can do!</p>
+            </article>
+        </div>
+    </body>
+</html>

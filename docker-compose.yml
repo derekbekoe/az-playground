@@ -6,9 +6,9 @@ services:
         ports:
             - "80:80"
         environment:
-            PLAYGROUND_API_ROOT_ENDPOINT: http://13.91.57.206
+            PLAYGROUND_API_ROOT_ENDPOINT: 13.91.57.206
             PLAYGROUND_API_ROOT_ENDPOINT_PORT: 81
-            PLAYGROUND_INSTANCE_URL: http://13.91.57.206
+            PLAYGROUND_INSTANCE_URL: 13.91.57.206
         image: derekbekoe/az-playground-frontend
     api:
         build:

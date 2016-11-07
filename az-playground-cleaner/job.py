@@ -9,7 +9,7 @@ WORKER_IMAGE = 'az-playground-worker:1'
 HOUR = 3600
 EXPIRY_SECS = HOUR*12
 now_secs = int(round(time.time()))
-containers = cli.containers()
+containers = cli.containers(all=True)
 
 to_remove = [c['Id'] for c in containers if c['Image'] == WORKER_IMAGE and c['Created']+EXPIRY_SECS < now_secs]
 

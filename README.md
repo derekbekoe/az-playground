@@ -4,6 +4,24 @@
 - The image name in app.py
 - Modify the port range in app.py
 
+az vm create -g debekoe1 -n playground-test1 --image UbuntuLTS
+
+ssh <ipaddress>
+
+curl -sSL https://get.docker.com/ | sh
+sudo
+curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+az network nsg rule create --access Allow --destination-address-prefix '*' --destination-port-range 80-5000 --direction InBound -g debekoe1 --nsg-name playground-test1NSG --protocol Tcp --source-address-prefix '*' --source-port-range '*' -n allow-all --priority 1001
+
+git clone https://github.com/derekbekoe/az-playground
+cd az-playground
+git checkout d1
+
+
+
+
 # FRONTEND SERVICE
 ```
 sudo docker build -t az-playground-frontend:1 .

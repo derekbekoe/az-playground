@@ -9,24 +9,17 @@ RUN apt-get update
 RUN apt-get install -y git
 RUN git clone https://github.com/sourcelair/xterm.js.git xtermjs
 # Install xterm dependencies
-RUN apt-get install -y nodejs-legacy npm
 # Install az dependencies
-RUN apt-get install -y curl libssl-dev libffi-dev python-dev build-essential
 # Install jpterm dependencies
-RUN apt-get install -y python-pip
+RUN apt-get install -y nodejs-legacy npm curl libssl-dev libffi-dev python-dev build-essential python-pip
 
 # Install xterm
 WORKDIR xtermjs
 RUN npm --logevel=error install
 
-RUN pip install azure-cli
-
-# Install jpterm
-RUN pip install --upgrade pip
-RUN pip install jmespath-terminal
+RUN pip install --upgrade pip jmespath-terminal azure-cli
 
 WORKDIR /
-
 # Override demo index.html file with our own
 ADD index.html /xtermjs/demo/index.html
 ADD style.css /xtermjs/demo/style.css
@@ -36,4 +29,3 @@ RUN cat /tmp/markdown.css >> /xtermjs/demo/style.css
 # Remove executables we don't want users to be able to run
 # RUN rm /usr/bin/apt-get /bin/ls /bin/cat /usr/bin/whoami /usr/bin/ssh
 CMD node xtermjs/demo/app
-

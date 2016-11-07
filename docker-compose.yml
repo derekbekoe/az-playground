@@ -1,17 +1,28 @@
 version: '2'
 services:
     frontend:
-    build: az-playground-frontend
-    ports:
-        - "80:80"
-    image: derekbekoe/az-playground-frontend
+        build:
+            context: ./az-playground-frontend
+        ports:
+            - "80:80"
+        image: derekbekoe/az-playground-frontend
     api:
-    build: az-playground-api
-    ports:
-        - "3050:5000"
-    depends_on:
-         - instance
-    image: derekbekoe/az-playground-api
+        build:
+            context: ./az-playground-api
+        ports:
+            - "81:5000"
+        depends_on:
+            - instance
+        image: derekbekoe/az-playground-api
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
     instance:
-    build: az-playground-instance
-    image: derekbekoe/az-playground-instance
+        build:
+            context: ./az-playground-instance
+        image: derekbekoe/az-playground-instance
+    cleaner:
+        build:
+            context: ./az-playground-cleaner
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        image: derekbekoe/az-playground-cleaner

@@ -9,7 +9,7 @@ VERSION = '0.0.1'
 START_PORT = 1000
 END_PORT = 5000
 WORKER_INFO = {
-    'image': 'az-playground-instance',
+    'image': 'derekbekoe/az-playground-instance',
     'source_port': 3000,
 }
 

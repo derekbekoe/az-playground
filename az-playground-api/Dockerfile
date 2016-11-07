@@ -15,5 +15,4 @@ ADD app.py /
 # ENV FLASK_DEBUG 1
 ENV FLASK_APP app.py
 
-# CMD flask run --host=0.0.0.0
 CMD gunicorn -w 10 -b 0.0.0.0:5000 app:app

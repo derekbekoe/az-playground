@@ -15,6 +15,10 @@ services:
             context: ./az-playground-api
         ports:
             - "81:5000"
+        environment:
+            PLAYGROUND_INSTANCE_PORT_RANGE_START: 1000
+            PLAYGROUND_INSTANCE_PORT_RANGE_END: 5000
+            PLAYGROUND_INSTANCE_IMAGE_NAME: derekbekoe/az-playground-instance
         depends_on:
             - instance
         image: derekbekoe/az-playground-api

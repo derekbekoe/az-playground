@@ -1,3 +1,4 @@
+import os
 import random
 import logging
 from flask import Flask, jsonify
@@ -6,10 +7,10 @@ from docker import Client, errors
 
 VERSION = '0.0.1'
 
-START_PORT = 1000
-END_PORT = 5000
+START_PORT = os.environ.get('PLAYGROUND_INSTANCE_PORT_RANGE_START', 1000)
+END_PORT = os.environ.get('PLAYGROUND_INSTANCE_PORT_RANGE_END', 5000)
 WORKER_INFO = {
-    'image': 'derekbekoe/az-playground-instance',
+    'image': os.environ.get('PLAYGROUND_INSTANCE_IMAGE_NAME'),
     'source_port': 3000,
 }
 

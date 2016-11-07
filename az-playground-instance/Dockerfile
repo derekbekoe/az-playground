@@ -19,12 +19,7 @@ RUN apt-get install -y python-pip
 WORKDIR xtermjs
 RUN npm --logevel=error install
 
-# Install az with tab completion
-RUN curl -sSL https://aka.ms/projectazinstall -o /tmp/az_install
-ENV AZURE_CLI_DISABLE_PROMPTS 1
-RUN bash /tmp/az_install
-RUN curl -s http://azure-cli-nightly.westus.cloudapp.azure.com/verified/setup_completion.py -o /tmp/az_completion
-RUN python /tmp/az_completion /usr/local/az
+RUN pip install azure-cli
 
 # Install jpterm
 RUN pip install --upgrade pip

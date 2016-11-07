@@ -15,17 +15,18 @@ chmod +x /usr/local/bin/docker-compose
 
 az network nsg rule create --access Allow --destination-address-prefix '*' --destination-port-range 80-5000 --direction InBound -g debekoe1 --nsg-name playground-test1NSG --protocol Tcp --source-address-prefix '*' --source-port-range '*' -n allow-all --priority 1001
 
-git clone https://github.com/derekbekoe/az-playground
-cd az-playground
-git checkout d1
+wget https://raw.githubusercontent.com/derekbekoe/az-playground/master/docker-compose.yml
 
 docker-compose up --build
 
 
+
 # FRONTEND SERVICE
 ```
-sudo docker build -t az-playground-frontend:1 .
-sudo docker run -p 80:80 -d --name frontend az-playground-frontend:1
+docker build -t derekbekoe/az-playground-api:0.1 az-playground-api
+docker build -t derekbekoe/az-playground-cleaner:0.1 az-playground-cleaner
+docker build -t derekbekoe/az-playground-frontend:0.1 az-playground-frontend
+docker build -t derekbekoe/az-playground-instance:0.1 az-playground-instance
 ```
 
 # API SERVICE

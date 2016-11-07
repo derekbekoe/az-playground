@@ -7,10 +7,8 @@ FROM ubuntu:16.04
 
 RUN apt-get update
 RUN apt-get install -y git
-RUN git clone https://github.com/sourcelair/xterm.js.git xtermjs
-# Install xterm dependencies
-# Install az dependencies
-# Install jpterm dependencies
+RUN git clone https://github.com/sourcelair/xterm.js.git xtermjs; cd xtermjs; git reset --hard 838c11b69c1f7f610eed426035b7dfe391803e87; cd -
+# Install xterm, az, jpterm dependencies
 RUN apt-get install -y nodejs-legacy npm curl libssl-dev libffi-dev python-dev build-essential python-pip
 
 # Install xterm

@@ -19,7 +19,7 @@ git clone https://github.com/derekbekoe/az-playground
 cd az-playground
 git checkout d1
 
-
+docker-compose up --build
 
 
 # FRONTEND SERVICE

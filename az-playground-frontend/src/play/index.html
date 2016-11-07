@@ -14,7 +14,7 @@
             var parsed_data = JSON.parse(data);
             $(document).ready(function(){
                 var iframe = $('#frame');
-                iframe.attr('src', 'http://az-playground-d1.westus.cloudapp.azure.com:'+parsed_data.port);
+                iframe.attr('src', 'http://'+'PLAYGROUND_INSTANCE_URL:'+parsed_data.port);
             });
         </script>
     </head>

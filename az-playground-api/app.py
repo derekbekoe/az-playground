@@ -7,9 +7,9 @@ from docker import Client, errors
 VERSION = '0.0.1'
 
 START_PORT = 1000
-END_PORT = 60000
+END_PORT = 5000
 WORKER_INFO = {
-    'image': 'az-playground-worker:1',
+    'image': 'az-playground-instance',
     'source_port': 3000,
 }
 

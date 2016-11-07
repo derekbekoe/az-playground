@@ -143,7 +143,7 @@
 				data: "",
 				dataType: "json",
 				cache: false,
-				url: 'http://az-playground-d1.westus.cloudapp.azure.com:81/create',
+				url: 'http://'+'PLAYGROUND_API_ROOT_ENDPOINT'+':'+'PLAYGROUND_API_ROOT_ENDPOINT_PORT'+'/create',
 				success: function(data, status, xhr){
 					if (data) {
 						$message._show('success', 'Ready!');

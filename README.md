@@ -28,6 +28,12 @@ docker build -t derekbekoe/az-playground-cleaner:0.1 az-playground-cleaner
 docker build -t derekbekoe/az-playground-frontend:0.1 az-playground-frontend
 docker build -t derekbekoe/az-playground-instance:0.1 az-playground-instance
 ```
+```
+docker push derekbekoe/az-playground-api:0.1
+docker push derekbekoe/az-playground-cleaner:0.1
+docker push derekbekoe/az-playground-frontend:0.1
+docker push derekbekoe/az-playground-instance:0.1
+```
 
 # API SERVICE
 Check the configs in the API service app.py (e.g. worker image name)

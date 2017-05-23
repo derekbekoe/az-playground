@@ -27,4 +27,4 @@ RUN cat /tmp/markdown.css >> /xtermjs/demo/style.css
 
 # Remove executables we don't want users to be able to run
 # RUN rm /usr/bin/apt-get /bin/ls /bin/cat /usr/bin/whoami /usr/bin/ssh
-CMD node xtermjs/demo/app
+CMD source az.completion.sh; node xtermjs/demo/app

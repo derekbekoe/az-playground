@@ -61,4 +61,9 @@ az network nsg rule create --access Allow --destination-address-prefix '*' --des
 
 wget https://raw.githubusercontent.com/derekbekoe/az-playground/master/docker-compose.yml
 
+Specify the endpoint (SPECIFY_ENDPOINT) in compose file!
+
+docker-compose up
+
+Or rename docker-compose-build.yml then:  
 docker-compose up --build

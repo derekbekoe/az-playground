@@ -63,7 +63,7 @@ wget https://raw.githubusercontent.com/derekbekoe/az-playground/master/docker-co
 Specify the endpoint (SPECIFY_ENDPOINT) in compose file!
 e.g. SPECIFY_ENDPOINT = az-playground-a3.eastus.cloudapp.azure.com
 
-docker-compose up
+sudo docker-compose up
 
 Or rename docker-compose-build.yml then:  
 docker-compose up --build

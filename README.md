@@ -51,17 +51,17 @@ ssh IP_ADDRESS
 
 curl -sSL https://get.docker.com/ | sh
 
-sudo
-
+sudo su  
 curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
-
 chmod +x /usr/local/bin/docker-compose
+exit  
 
 az network nsg rule create --access Allow --destination-address-prefix '*' --destination-port-range 80-5000 --direction InBound -g debekoe1 --nsg-name playground-test1NSG --protocol Tcp --source-address-prefix '*' --source-port-range '*' -n allow-all --priority 1001
 
 wget https://raw.githubusercontent.com/derekbekoe/az-playground/master/docker-compose.yml
 
 Specify the endpoint (SPECIFY_ENDPOINT) in compose file!
+e.g. SPECIFY_ENDPOINT = az-playground-a3.eastus.cloudapp.azure.com
 
 docker-compose up
 

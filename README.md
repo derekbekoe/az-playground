@@ -4,35 +4,18 @@
 - The image name in app.py
 - Modify the port range in app.py
 
-az vm create -g debekoe1 -n playground-test1 --image UbuntuLTS
-
-ssh <ipaddress>
-
-curl -sSL https://get.docker.com/ | sh
-sudo
-curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-
-az network nsg rule create --access Allow --destination-address-prefix '*' --destination-port-range 80-5000 --direction InBound -g debekoe1 --nsg-name playground-test1NSG --protocol Tcp --source-address-prefix '*' --source-port-range '*' -n allow-all --priority 1001
-
-wget https://raw.githubusercontent.com/derekbekoe/az-playground/master/docker-compose.yml
-
-docker-compose up --build
-
-
-
 # FRONTEND SERVICE
 ```
-docker build -t derekbekoe/az-playground-api:0.1 az-playground-api
-docker build -t derekbekoe/az-playground-cleaner:0.1 az-playground-cleaner
-docker build -t derekbekoe/az-playground-frontend:0.1 az-playground-frontend
-docker build -t derekbekoe/az-playground-instance:0.1 az-playground-instance
+docker build -t derekbekoe/az-playground-api:0.2 az-playground-api
+docker build -t derekbekoe/az-playground-cleaner:0.2 az-playground-cleaner
+docker build -t derekbekoe/az-playground-frontend:0.2 az-playground-frontend
+docker build -t derekbekoe/az-playground-instance:0.2 az-playground-instance
 ```
 ```
-docker push derekbekoe/az-playground-api:0.1
-docker push derekbekoe/az-playground-cleaner:0.1
-docker push derekbekoe/az-playground-frontend:0.1
-docker push derekbekoe/az-playground-instance:0.1
+docker push derekbekoe/az-playground-api:0.2
+docker push derekbekoe/az-playground-cleaner:0.2
+docker push derekbekoe/az-playground-frontend:0.2
+docker push derekbekoe/az-playground-instance:0.2
 ```
 
 # API SERVICE
@@ -60,18 +43,22 @@ sudo docker run -it -d -v /var/run/docker.sock:/var/run/docker.sock --name clean
 
 ---
 az login
-az resource group create -l westus -n azure-cli-playground
-az vm create -g azure-cli-playground -n azplayground --image UbuntuLTS --size Standard_D3_v2 --dns-name-for-public-ip az-playground-d1
-az network nsg rule create --access Allow --destination-address-prefix '*' --destination-port-range 80-60000 --direction InBound -g azure-cli-playground --nsg-name azplaygroundNSG --protocol Tcp --source-address-prefix '*' --source-port-range '*' -n allow-all --priority 1001
+az group create -l eastus -n azure-cli-playground
+az vm create -g azure-cli-playground -n azplayground --image UbuntuLTS --size Standard_D3_v2 --public-ip-address-dns-name az-playground-a1
+az vm open-port --port 80-5000 -g azure-cli-playground -n azplayground3
 
-ssh az-playground-d1.westus.cloudapp.azure.com
-OR
-ssh 13.91.46.9
+ssh IP_ADDRESS
+
 curl -sSL https://get.docker.com/ | sh
 
-Live - https://aka.ms/projectazplayground
-Live - http://az-playground-d1.westus.cloudapp.azure.com
-Back up - http://23.99.91.240/
+sudo
 
+curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
 
+chmod +x /usr/local/bin/docker-compose
 
+az network nsg rule create --access Allow --destination-address-prefix '*' --destination-port-range 80-5000 --direction InBound -g debekoe1 --nsg-name playground-test1NSG --protocol Tcp --source-address-prefix '*' --source-port-range '*' -n allow-all --priority 1001
+
+wget https://raw.githubusercontent.com/derekbekoe/az-playground/master/docker-compose.yml
+
+docker-compose up --build

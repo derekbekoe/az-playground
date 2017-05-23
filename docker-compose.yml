@@ -7,24 +7,24 @@ services:
             PLAYGROUND_API_ROOT_ENDPOINT: SPECIFY_ENDPOINT
             PLAYGROUND_API_ROOT_ENDPOINT_PORT: 81
             PLAYGROUND_INSTANCE_URL: SPECIFY_ENDPOINT
-        image: derekbekoe/az-playground-frontend:0.1
+        image: derekbekoe/az-playground-frontend:0.2
     api:
         ports:
             - "81:5000"
         environment:
             PLAYGROUND_INSTANCE_PORT_RANGE_START: 1000
             PLAYGROUND_INSTANCE_PORT_RANGE_END: 5000
-            PLAYGROUND_INSTANCE_IMAGE_NAME: derekbekoe/az-playground-instance:0.1
+            PLAYGROUND_INSTANCE_IMAGE_NAME: derekbekoe/az-playground-instance:0.2
         depends_on:
             - instance
-        image: derekbekoe/az-playground-api:0.1
+        image: derekbekoe/az-playground-api:0.2
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
     instance:
-        image: derekbekoe/az-playground-instance:0.1
+        image: derekbekoe/az-playground-instance:0.2
     cleaner:
         environment:
-            PLAYGROUND_INSTANCE_IMAGE_NAME: derekbekoe/az-playground-instance:0.1
+            PLAYGROUND_INSTANCE_IMAGE_NAME: derekbekoe/az-playground-instance:0.2
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-        image: derekbekoe/az-playground-cleaner:0.1
+        image: derekbekoe/az-playground-cleaner:0.2

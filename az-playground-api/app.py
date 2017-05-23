@@ -5,7 +5,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS, cross_origin
 from docker import Client, errors
 
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 
 START_PORT = int(os.environ.get('PLAYGROUND_INSTANCE_PORT_RANGE_START', 1000))
 END_PORT = int(os.environ.get('PLAYGROUND_INSTANCE_PORT_RANGE_END', 5000))
